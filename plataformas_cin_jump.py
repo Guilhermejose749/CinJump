@@ -69,3 +69,68 @@ while rodar:
 
     pygame.display.update()
 pygame.quit()
+
+############################################################################################
+import pygame
+from random import *
+
+# O CODIGO DEVERÁ SOFRER ALTERAÇÕES APÓS DECIDIR OS SPRITES 
+
+cores_plataforma = {'verde': (0,255,0),
+                    'vermelho': (255,0,0),
+                    'azul': (0,0,255),
+                    'cores totais': ['verde', 'vermelho', 'azul']}
+#CLASSE 
+
+class plataforma:
+    
+    def __init__(self, X, Y, LARGURA):
+        self.X = X
+        self.Y = Y
+        self.LARGURA = LARGURA
+
+    def desenhar(self,COR,TELA):
+        pygame.draw.rect(TELA, COR, (self.X, self.Y, self.LARGURA, 30))
+
+
+# FUNÇÕES
+
+def gerar_plataformas(MAX_PLATAFORMAS):
+    PLATAFORMAS = []
+    for p in range (randint(1,MAX_PLATAFORMAS)):
+        plataforma_aleatoria = choice(cores_plataforma['cores totais'])   
+        PLATAFORMAS.append(plataforma_aleatoria)
+    return PLATAFORMAS
+
+def construir_mapa(LISTA_PLATAFORMAS,LARGURA,TELA):
+    MULTIPLICADOR = 0
+    for p in LISTA_PLATAFORMAS:
+        P_L = 100
+        P_X = randint(0, LARGURA-30)
+        P_Y = MULTIPLICADOR*randint(120,150)
+        MULTIPLICADOR +=  1
+        cor = cores_plataforma[p]
+        platform = plataforma(P_X,P_Y,P_L)
+        platform.desenhar(cor,TELA)
+        
+
+# AREA DE TESTES RETIRAR QUANDO O CÓDIGO FOR FINALIZADO
+LARGURA = 800
+ALTURA = 800
+
+pygame.init()
+TELA = pygame.display.set_mode((LARGURA, ALTURA))
+
+MAX_PLATAFORMAS = 10
+
+plataformas = gerar_plataformas(MAX_PLATAFORMAS)
+construir_mapa(plataformas, LARGURA, TELA)
+rodar = True
+while rodar:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            rodar = False
+
+
+    pygame.display.update()
+pygame.quit()
