@@ -106,19 +106,19 @@ def construir_mapa(LISTA_PLATAFORMAS,LARGURA,TELA):
     MULTIPLICADOR = 0
     for i,p in enumerate(LISTA_PLATAFORMAS):
         P_L = 100
-        P_X = randint(0, LARGURA-100)
+        P_X = randint(0, LARGURA-110)
         if i ==0:
-            P_Y = 50
+            P_Y = 10
         else:    
-            P_Y = 150 + MULTIPLICADOR
-            MULTIPLICADOR +=  100
+            P_Y = 160 + MULTIPLICADOR
+            MULTIPLICADOR +=  150
         cor = cores_plataforma[p]
         platform = plataforma(P_X,P_Y,P_L)
         platform.desenhar(cor,TELA)
         
 
 # AREA DE TESTES RETIRAR QUANDO O CÓDIGO FOR FINALIZADO
-LARGURA = 800
+LARGURA = 600
 ALTURA = 800
 
 pygame.init()
