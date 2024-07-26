@@ -106,9 +106,9 @@ def construir_mapa(LISTA_PLATAFORMAS,LARGURA,TELA):
     MULTIPLICADOR = 0
     for p in LISTA_PLATAFORMAS:
         P_L = 100
-        P_X = randint(0, LARGURA-30)
-        P_Y = MULTIPLICADOR*randint(120,150)
-        MULTIPLICADOR +=  1
+        P_X = randint(0, LARGURA-50)
+        P_Y = 100 + MULTIPLICADOR
+        MULTIPLICADOR +=  100
         cor = cores_plataforma[p]
         platform = plataforma(P_X,P_Y,P_L)
         platform.desenhar(cor,TELA)
