@@ -84,31 +84,34 @@ cores_plataforma = {'verde': (0,255,0),
 
 class plataforma:
     
-    def __init__(self, X, Y, LARGURA):
+    def __init__(self, X, Y, L):
         self.X = X
         self.Y = Y
-        self.LARGURA = LARGURA
+        self.L = L
 
     def desenhar(self,COR,TELA):
-        pygame.draw.rect(TELA, COR, (self.X, self.Y, self.LARGURA, 30))
+        pygame.draw.rect(TELA, COR, (self.X, self.Y, self.L, 30))
 
 
 # FUNÇÕES
 
 def gerar_plataformas(MAX_PLATAFORMAS):
     PLATAFORMAS = []
-    for p in range (randint(1,MAX_PLATAFORMAS)):
+    for p in range (0,MAX_PLATAFORMAS):
         plataforma_aleatoria = choice(cores_plataforma['cores totais'])   
         PLATAFORMAS.append(plataforma_aleatoria)
     return PLATAFORMAS
 
 def construir_mapa(LISTA_PLATAFORMAS,LARGURA,TELA):
     MULTIPLICADOR = 0
-    for p in LISTA_PLATAFORMAS:
+    for i,p in enumerate(LISTA_PLATAFORMAS):
         P_L = 100
-        P_X = randint(0, LARGURA-50)
-        P_Y = 100 + MULTIPLICADOR
-        MULTIPLICADOR +=  100
+        P_X = randint(0, LARGURA-100)
+        if i ==0:
+            P_Y = 50
+        else:    
+            P_Y = 150 + MULTIPLICADOR
+            MULTIPLICADOR +=  100
         cor = cores_plataforma[p]
         platform = plataforma(P_X,P_Y,P_L)
         platform.desenhar(cor,TELA)
@@ -121,7 +124,7 @@ ALTURA = 800
 pygame.init()
 TELA = pygame.display.set_mode((LARGURA, ALTURA))
 
-MAX_PLATAFORMAS = 10
+MAX_PLATAFORMAS = int(ALTURA/100)
 
 plataformas = gerar_plataformas(MAX_PLATAFORMAS)
 construir_mapa(plataformas, LARGURA, TELA)
@@ -130,7 +133,7 @@ while rodar:
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             rodar = False
-
+        
 
     pygame.display.update()
 pygame.quit()
